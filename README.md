@@ -24,7 +24,7 @@ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.6.0/deepspeech-0
 _Coding style convention ref optional, eg which linter to use_
 _Linting, github pre-push hook - optional_ -->
 
-- NodeJS (Versions 4.x, 5.x, 6.x, 7.x, 8.x, 9.x, 10.x, 11.x, 12.x and 13.x) installed via, [as required by Deepspeech](https://github.com/mozilla/DeepSpeech/releases/tag/v0.6.0)
+- NodeJS (Versions 4.x, 5.x, 6.x, 7.x, 8.x, 9.x, 10.x, 11.x, 12.x and 13.x) [as required by Deepspeech](https://github.com/mozilla/DeepSpeech/releases/tag/v0.6.0)
 
 ## Build
 <!-- _How to run build_ -->
