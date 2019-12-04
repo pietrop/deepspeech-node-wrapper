@@ -8,6 +8,9 @@ eg
 let result = model.sttWithMetadata(audioBuffer.slice(0, audioBuffer.length / 2));
 ```
 
+>object – Outputs a Metadata() struct of individual letters along with their timing information
+
+
 ```js
 $ node index.js audio/4507-16021-0012.wav
 TensorFlow: v1.14.0-21-ge77504ac6b
