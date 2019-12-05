@@ -27,6 +27,22 @@ function createParagraphsFromWords(wordsList) {
     }
   });
 
+  // handle instance where there is no punctuation, and therefore no paragraphs 
+  // to make one overarching paragraph for all the words
+  if (result.length === 0) {
+    const firstword = wordsList[0];
+    const firstwordStartTime = firstword.start;
+    const numberOfWords = wordsList.length - 1;
+    const lastWord = wordsList[numberOfWords];
+    const lastWordEndTime = lastWord.end;
+    const speakerItem = {
+      speaker: `${SPEAKER_LABEL} 0`,
+      start: firstwordStartTime,
+      end: lastWordEndTime
+    };
+    result.push(speakerItem);
+  }
+
   return result;
 }
 

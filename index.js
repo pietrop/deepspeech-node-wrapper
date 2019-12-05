@@ -4,6 +4,7 @@ const sox = require('sox-stream');
 const MemoryStream = require('memory-stream');
 const Duplex = require('stream').Duplex;
 const Wav = require('node-wav');
+const convertDeepSpeechTimedCharToTimedWord = require('./convertDeepSpeechTimedCharToTimedWord/index.js');
 
 const BEAM_WIDTH = 1024;
 // MODEL PATH
@@ -62,10 +63,20 @@ pipe(sox({
 })).
 pipe(audioStream);
 
+audioStream.on('data', (data) => {
+	console.log('data', data)
+})
+
+audioStream.on('error', (errro) => {
+	console.log('error', error)
+})
+
+
 audioStream.on('finish', () => {
 	let audioBuffer = audioStream.toBuffer();
 	
 	const audioLength = (audioBuffer.length / 2) * (1 / desiredSampleRate);
+	// TODO: add audio length to results. seconds.
 	console.log('audio length', audioLength);
 	
 	let result = model.sttWithMetadata(audioBuffer.slice(0, audioBuffer.length / 2));
@@ -77,6 +88,9 @@ audioStream.on('finish', () => {
 	console.log(metadataItem)
 	console.log(metadataItem.character, metadataItem.start_time)
 	fs.writeFileSync('example-output.json',JSON.stringify(result, null, 2))
+	const dpeResult = convertDeepSpeechTimedCharToTimedWord(result);
+	console.log(dpeResult)
+	fs.writeFileSync('example-output-dpe.json',JSON.stringify(dpeResult, null, 2))
 });
 
 // TODO function, convert deepspeech time level char, to timed words
