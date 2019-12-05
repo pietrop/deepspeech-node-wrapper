@@ -1,6 +1,6 @@
 const DeepSpeech = require('deepspeech');
-const Fs = require('fs');
-const Sox = require('sox-stream');
+const fs = require('fs');
+const sox = require('sox-stream');
 const MemoryStream = require('memory-stream');
 const Duplex = require('stream').Duplex;
 const Wav = require('node-wav');
@@ -24,12 +24,12 @@ model.enableDecoderWithLM(lmPath, triePath, LM_ALPHA, LM_BETA);
 
 let audioFile = process.argv[2] || './audio/2830-3980-0043.wav';
 
-if (!Fs.existsSync(audioFile)) {
+if (!fs.existsSync(audioFile)) {
 	console.log('file missing:', audioFile);
 	process.exit();
 }
 
-const buffer = Fs.readFileSync(audioFile);
+const buffer = fs.readFileSync(audioFile);
 const result = Wav.decode(buffer);
 
 if (result.sampleRate < desiredSampleRate) {
@@ -45,7 +45,8 @@ function bufferToStream(buffer) {
 
 let audioStream = new MemoryStream();
 bufferToStream(buffer).
-pipe(Sox({
+pipe(sox({
+	// soxPath: ,
 	global: {
 		'no-dither': true,
 	},
@@ -72,4 +73,12 @@ audioStream.on('finish', () => {
 	// https://deepspeech.readthedocs.io/en/v0.6.0/NodeJS-API.html#FreeMetadata
  	
 	console.log('result:', result);
+	const metadataItem = result.items[0]
+	console.log(metadataItem)
+	console.log(metadataItem.character, metadataItem.start_time)
+	fs.writeFileSync('example-output.json',JSON.stringify(result, null, 2))
 });
+
+// TODO function, convert deepspeech time level char, to timed words
+// function 
+
