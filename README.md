@@ -5,14 +5,12 @@ _Screenshot of UI - optional_ -->
 
 from https://github.com/mozilla/DeepSpeech/tree/master/examples/nodejs_wav
 
+_TBC_ _Work in progress_
 
 ## Setup
 <!-- _stack - optional_
 _How to build and run the code/app_ -->
 
-```
-wget https://github.com/mozilla/DeepSpeech/releases/download/v0.6.0/deepspeech-0.6.0-models.tar.gz
-```
 
 ## Usage
 
