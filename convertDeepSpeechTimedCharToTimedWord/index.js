@@ -1,25 +1,16 @@
-function convertDeepSpeechTimedCharToTimedWord(items) {
-  const result = [];
-  let word = { text: "" };
-  let isNewWord = true;
-  items.forEach(c => {
-    if (c.character === " ") {
-      word.end = c.start_time;
-      word.text = word.text.trim();
-      result.push(word);
-      word = { text: "" };
-      isNewWord = true;
-    }
-    if (c.character) {
-      if (isNewWord) {
-        word.start = c.start_time;
-      }
-      // if it is a new word, convert to false, if it is already false, leave as is
-      isNewWord = isNewWord ? !isNewWord : isNewWord;
-      word.text += c.character;
-    }
-  });
-  return result;
+// const exampleDeepSpeech = require('../deepspeech-data.json');
+const convertDeepSpeechTimedCharToTimedWord = require('./generateWords/index.js');
+const createParagraphsFromWords = require('./generateParagraphs/index.js');
+
+/**
+ * 
+ * @param {json} deepSpeechData - STT with char level timings from DeepSpeech `sttWithMetadata`
+ */
+function convertDeepSpeechToDPE(deepSpeechData){
+    const items = deepSpeechData.items? deepSpeechData.items : deepSpeechData;
+    const words = convertDeepSpeechTimedCharToTimedWord(items);
+    const paragraphs = createParagraphsFromWords(words)
+    return {words, paragraphs}
 }
 
-module.exports = convertDeepSpeechTimedCharToTimedWord;
+module.exports = convertDeepSpeechToDPE;

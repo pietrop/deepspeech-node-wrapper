@@ -1,7 +1,6 @@
-const exampleDeepSpeech = require('./deepspeech-example-output.json')
-const convertDeepSpeechTimedCharToTimedWord = require('./index.js');
+const deepSpeechData = require('./deepspeech-data.json');
+const convertDeepSpeechToDPE = require('./index.js');
 
+const result = convertDeepSpeechToDPE(deepSpeechData)
 
-const result = convertDeepSpeechTimedCharToTimedWord(exampleDeepSpeech.items)
-
-console.log(JSON.stringify(result, null,2))
+console.log(result)
