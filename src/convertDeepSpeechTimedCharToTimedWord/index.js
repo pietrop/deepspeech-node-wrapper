@@ -1,4 +1,3 @@
-// const exampleDeepSpeech = require('../deepspeech-data.json');
 const convertDeepSpeechTimedCharToTimedWord = require('./generateWords/index.js');
 const createParagraphsFromWords = require('./generateParagraphs/index.js');
 
