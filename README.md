@@ -1,11 +1,11 @@
 
-## deepspeech-node-wrapper
+## `deepspeech-node-wrapper`
 <!-- _One liner + link to confluence page_
 _Screenshot of UI - optional_ -->
 
-from https://github.com/mozilla/DeepSpeech/tree/master/examples/nodejs_wav
-
 _TBC_ _Work in progress_
+
+A node module that wraps around Mozilla Deepspeech node, to make it easier to use and get transcripts with word level timing.
 
 ## Setup
 <!-- _stack - optional_
@@ -67,7 +67,7 @@ see example usage in src folder for more.
 <!-- _High level overview of system architecture_ -->
 
 <!-- uses example from... -->
-
+- initially from [`DeepSpeech/examples/nodejs_wav`](https://github.com/mozilla/DeepSpeech/tree/master/examples/nodejs_wav)
 - uses [`sox-bin`](https://www.npmjs.com/package/sox-bin) to package the binary for the right OS (10mb)
 
 <!--  could be moved -->

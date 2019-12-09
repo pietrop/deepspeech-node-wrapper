@@ -3,7 +3,6 @@ const deepSpeechSttWrapper = require("./index.js");
 
 // absolute path of file
 const audioFile = "./audio/2830-3980-0043.wav";
-// const audioFile = "/Users/passarellip/Movies/1.40min-apple-earning-call-sample.wav"
 
 async function main(){
     try{
