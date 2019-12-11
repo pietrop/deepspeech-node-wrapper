@@ -17,6 +17,7 @@ The question this ADR explore is, how to package the the STT models in this npm 
 * Easy to reason around
 * Avoid adding large binaries to git repository 
 * ease of use and setup 
+* considerate of slow internet connections
 * … <!-- numbers of drivers can vary -->
 
 ## Considered Options
@@ -171,9 +172,9 @@ In [`package.json`](https://github.com/teamthesol/node-DeepSpeech/blob/1d810c48b
 In an electron app you could have something similar this to download the models in the user's library on the system, on a path that is passed to `deepspeech-node-wrapper` etc...
 
 **pros**
-- download the models when needed
-- easy to package the electron app, and add the models only if needed/when in use
+- models added as part of npm install step but not bundled with the npm package or github repository 
+- easy to package 
 
 **cons**
-- decoupling of models from `deepspeech-node-wrapper` module might lead to extra uneccessary complexity 
+- might slow down npm install if it needs to download 1.8gb to complete
 
