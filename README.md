@@ -60,7 +60,7 @@ async function main(audioFile){
 
 main(audioFile)
 ```
-see example usage in src folder for more.
+See example usage in src folder for more.
  
 
 ## System Architecture
