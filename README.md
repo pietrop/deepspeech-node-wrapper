@@ -21,6 +21,8 @@ npm install deepspeech-node-wrapper
 ```
 -->
 
+Note that the wav file needs to be 16khz and mono.
+
 Promises 
 ```js
 const deepSpeechSttWrapper = require("deepspeech-node-wrapper");
