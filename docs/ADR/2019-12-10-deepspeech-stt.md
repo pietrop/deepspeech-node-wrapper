@@ -8,7 +8,7 @@
 
 Making a node wrapper for Mozilla Deepseepch, in `deepspeech-node-wrapper`.
 
-Using Mozilla node `deepspeech` module and their example [`DeepSpeech/examples/nodejs_wav`](https://github.com/mozilla/DeepSpeech/tree/master/examples/nodejs_wav) as a starting point.
+Using Mozilla node `deepspeech` module and their example [`DeepSpeech/examples/nodejs_wav`](https://github.com/mozilla/DeepSpeech-examples/tree/r0.6/nodejs_wav) as a starting point.
 
 The question this ADR explore is, how to package the the STT models in this npm module?
 
@@ -74,15 +74,18 @@ Package the model (1.8gb) in npm package `deepspeech-node-wrapper`.
 - on the other hand in electron can have build step that is for packaging deepspeech
 and one without deepspeech (so that if one is not using deepspeech they don't have to deal with the extra 1.8gb file size when downloading the electron app)
 
+
 **cons**
-- it might get confusing to figure out how to pass relative or absolute path from one module to the other
+- decoupling of models from `deepspeech-node-wrapper` module might lead to extra uneccessary complexity 
+  - eg it might get confusing to figure out how to pass relative or absolute path from one module to the other
+- might be unecessary to store model in npm package if it's already in github releases for Mozilla DeepSpeech
 
 ### 3.Download models in host app (eg Electron)
 
 Another option is to not package the models with the modle, pass the path to the model as an attribute, and have that as an option in the host app, eg in electron for [BBC DPE](https://github.com/bbc/digital-paper-edit-electron), under STT settings, that downloads and unpacks up the models, get the path, and pass it to the `deepspeech-node-wrapper` node module.
 
 **pros**
-- easoer to do electron releases without adding 1.8gb of models to the app
+- easier to do electron releases without adding 1.8gb of models to the app
 - user can decide to download models only if they need them
 **cons**
 - user has to do two steps to start using electron app with deepspeech 
