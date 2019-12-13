@@ -1,4 +1,4 @@
-<!-- from https://github.com/mozilla/DeepSpeech/tree/master/examples/nodejs_wav -->
+<!-- from https://github.com/mozilla/DeepSpeech-examples/tree/r0.6/nodejs_wav -->
 
 # NodeJS voice recognition example using Mozilla DeepSpeech
 

@@ -21,6 +21,8 @@ npm install deepspeech-node-wrapper
 ```
 -->
 
+Note that the wav file needs to be 16khz and mono.
+
 Promises 
 ```js
 const deepSpeechSttWrapper = require("deepspeech-node-wrapper");
@@ -67,7 +69,7 @@ See example usage in src folder for more.
 <!-- _High level overview of system architecture_ -->
 
 <!-- uses example from... -->
-- initially from [`DeepSpeech/examples/nodejs_wav`](https://github.com/mozilla/DeepSpeech/tree/master/examples/nodejs_wav)
+- initially from [`DeepSpeech/examples/nodejs_wav`](https://github.com/mozilla/DeepSpeech-examples/tree/r0.6/nodejs_wav)
 - uses [`sox-bin`](https://www.npmjs.com/package/sox-bin) to package the binary for the right OS (10mb)
 
 <!--  could be moved -->
