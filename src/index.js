@@ -2,28 +2,28 @@ const fs = require("fs");
 const path = require("path");
 const DeepSpeech = require("deepspeech");
 const sox = require("sox-stream");
-const soxPath = require('sox-bin')
+const soxPath = require("sox-bin");
 const MemoryStream = require("memory-stream");
 const Duplex = require("stream").Duplex;
 const Wav = require("node-wav");
 const convertDeepSpeechTimedCharToTimedWord = require("./convertDeepSpeechTimedCharToTimedWord/index.js");
 
-// TODO: subsequent version, lmPath, triePath, and modelPath attribute
-// could be passed as input to allow custumization of which model to use 
-const BEAM_WIDTH = 1024;
-// MODEL PATH
-let modelPath = path.join(__dirname,"./models/output_graph.pbmm");
-let model = new DeepSpeech.Model(modelPath, BEAM_WIDTH);
-let desiredSampleRate = model.sampleRate();
-const LM_ALPHA = 0.75;
-const LM_BETA = 1.85;
-// MODEL PATH
-let lmPath = path.join(__dirname,"./models/lm.binary");
-// MODEL PATH
-let triePath = path.join(__dirname,"./models/trie");
-model.enableDecoderWithLM(lmPath, triePath, LM_ALPHA, LM_BETA);
+function deepSpeechSttWrapper(audioFile, modelPath) {
+  // TODO: subsequent version, lmPath, triePath, and modelPath attribute
+  // could be passed as input to allow custumization of which model to use
+  const BEAM_WIDTH = 1024;
+  // MODEL PATH
+  let modelPathGraph = path.join(modelPath, "output_graph.pbmm");
+  let model = new DeepSpeech.Model(modelPathGraph, BEAM_WIDTH);
+  let desiredSampleRate = model.sampleRate();
+  const LM_ALPHA = 0.75;
+  const LM_BETA = 1.85;
+  // MODEL PATH
+  let lmPath = path.join(modelPath, "lm.binary");
+  // MODEL PATH
+  let triePath = path.join(modelPath, "trie");
+  model.enableDecoderWithLM(lmPath, triePath, LM_ALPHA, LM_BETA);
 
-function deepSpeechSttWrapper(audioFile) {
   return new Promise((resolve, reject) => {
     if (!fs.existsSync(audioFile)) {
       console.log("file missing:", audioFile);
@@ -76,8 +76,8 @@ function deepSpeechSttWrapper(audioFile) {
     });
 
     audioStream.on("error", errro => {
-	  console.log("error", error);
-	  reject(error)
+      console.log("error", error);
+      reject(error);
     });
 
     audioStream.on("finish", () => {
@@ -91,12 +91,11 @@ function deepSpeechSttWrapper(audioFile) {
       // TODO: need to run freeMetadata() but not sure how
       // https://deepspeech.readthedocs.io/en/v0.6.0/NodeJS-API.html#FreeMetadata
       const dpeResult = convertDeepSpeechTimedCharToTimedWord(result);
-	  const resulData = {dpeResult, result, audioLength }
-	  resolve(resulData);
+      const resulData = { dpeResult, result, audioLength };
+      resolve(resulData);
     });
   });
 }
-
 
 module.exports = deepSpeechSttWrapper;
 module.exports.convertDeepSpeechTimedCharToTimedWord = convertDeepSpeechTimedCharToTimedWord;

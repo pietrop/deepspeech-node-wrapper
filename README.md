@@ -28,8 +28,8 @@ Promises
 const deepSpeechSttWrapper = require("deepspeech-node-wrapper");
 // absolute path to audio file file
 const audioFile = "./audio/2830-3980-0043.wav";
-
-deepSpeechSttWrapper(audioFile)
+const modelPath = path.join(__dirname,'./models'); 
+deepSpeechSttWrapper(audioFile, modelPath)
   .then(res => {
     console.log(JSON.stringify(res, null, 2));
     const { dpeResult, result, audioLength } = res;
@@ -45,9 +45,9 @@ const deepSpeechSttWrapper = require("deepspeech-node-wrapper");
 // absolute path to audio file file
 const audioFile = "./audio/2830-3980-0043.wav";
 
-async function main(audioFile){
+async function main(audioFile, modelPath){
     try{
-        const res = await deepSpeechSttWrapper(audioFile);
+        const res = await deepSpeechSttWrapper(audioFile, modelPath);
         const { dpeResult, result, audioLength } = await res;
         console.log(dpeResult)
         fs.writeFileSync(
@@ -60,9 +60,16 @@ async function main(audioFile){
     }
 }
 
-main(audioFile)
+const modelPath = path.join(__dirname,'./models'); 
+main(audioFile, modelPath)
 ```
-See example usage in src folder for more.
+
+`modelPath`, is the folder for the [deepspeech model](https://github.com/mozilla/DeepSpeech/releases/tag/v0.6.0), and expects to contain 
+- `output_graph.pbmm`
+- `lm.binary`
+- `trie`
+
+For more, see example usage in src folder for more.
  
 
 ## System Architecture
