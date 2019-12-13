@@ -1,7 +1,7 @@
 # Deepspeech STT Models integration
 
 - Status: considered <!-- optional -->
-- Deciders: Pietro <!-- optional -->
+- Deciders: Pietro, Eimi <!-- optional -->
 - Date: 2019-12-11
 
 ## Context and Problem Statement
