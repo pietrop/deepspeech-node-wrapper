@@ -37,7 +37,7 @@ The question this ADR explore is, how to package the the STT models in this npm 
 
 _TBC_
 
-most likely a combination of these 5 options
+Leaning torwards option 3.
 
 <!-- ### Positive Consequences
 
@@ -91,6 +91,8 @@ Package the model (1.8gb) in npm package `deepspeech-node-wrapper`.
 ### 3.Download models in host app (eg Electron)
 
 Another option is to not package the models with the model, pass the path to the model as an attribute, and have that as an option in the host app, eg in electron for [BBC DPE](https://github.com/bbc/digital-paper-edit-electron), under STT settings, that downloads and unpacks up the models, get the path, and pass it to the `deepspeech-node-wrapper` node module.
+
+Perhaps provide an helper function to download the models, taking input the path to save locally, and a callback or promise to notify when done, ideally with download progress update info as well.
 
 **pros**
 
