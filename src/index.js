@@ -7,6 +7,7 @@ const MemoryStream = require("memory-stream");
 const Duplex = require("stream").Duplex;
 const Wav = require("node-wav");
 const convertDeepSpeechTimedCharToTimedWord = require("./convertDeepSpeechTimedCharToTimedWord/index.js");
+const downloadDeepSpeechModel = require('./downloadDeepSpeechModel');
 
 function deepSpeechSttWrapper(audioFile, modelPath) {
   // TODO: subsequent version, lmPath, triePath, and modelPath attribute
@@ -99,3 +100,4 @@ function deepSpeechSttWrapper(audioFile, modelPath) {
 
 module.exports = deepSpeechSttWrapper;
 module.exports.convertDeepSpeechTimedCharToTimedWord = convertDeepSpeechTimedCharToTimedWord;
+module.exports.downloadDeepSpeechModel = downloadDeepSpeechModel;
