@@ -15,13 +15,13 @@ git clone, cd, npm install
 
 
 ## Usage
-<!-- requrie from npm
+requrie from npm
+
 ```
 npm install deepspeech-node-wrapper
 ```
--->
 
-Note that the wav file needs to be 16khz and mono.
+Note that the wav audio file needs to be 16khz and mono.
 
 Promises 
 ```js
