@@ -118,6 +118,7 @@ stats.json
 # Deepspeech ignore large files, model, audio etc..
 models/
 audio/
+audio/
 
 deepspeech-0.6.0-models.tar.gz
 audio-0.4.1.tar.gz   
