@@ -70,6 +70,10 @@ function downloadDeepSpeechModel(destFolder, modelVersion) {
       await fs.unlinkSync(modelOutputPath);
       // TODO: rename output file,
       console.log("modelOutputPath:: ", modelOutputPath);
+      // seems like when you do unzip a tar it gives it the default
+      // name that it had when it was zipped?
+      // so doing this workaround to grap the final model folder name
+      // pehaps in can look into how to give it a custom name?
       const deepSpeechmodelPath = modelFolderOutputName(
         destFolder,
         modelVersion
