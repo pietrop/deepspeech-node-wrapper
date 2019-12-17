@@ -5,6 +5,7 @@
 const fs = require("fs");
 const wget = require("wget-improved");
 const tar = require("tar");
+const pathCompleteExtname = require('path-complete-extname');
 
 function deepSpeechModelUrl(modelVersion) {
   // TODO: some checks it's a valid model name, eg regex for 0.6.0;
@@ -48,15 +49,19 @@ function downloadDeepSpeechModel(modelOutput, modelVersion) {
       // bar.tick(100000 / 2);
       console.log("\n Extracting tar archive...");
       // unzip
-      await tar.x({ file: modelOutputPath });
+      // TODO can test tar unzip in a separate file 
+      await tar.x({ file: modelOutputPath, C: modelOutput });
       console.log("Done extracting archive");
       // extracted files will be in folder same name as tar archive 
       // but without the `.tar.gz` extension
       console.log("Removinf temporary tar archive...");
-      fs.unlinkSync(modelOutputPath);
+      // TODO: temporarily commenting out cleaning up after tar file, for troubleshooting
+      // fs.unlinkSync(modelOutputPath);
       // TODO: rename output file,
-      console.log(modelOutputPath);
-      resolve(modelOutputPath);
+      console.log('modelOutputPath:: ',modelOutputPath);
+      // TODO: should return the name of the output file
+      // containign the models, not the tar file
+      resolve(modelOutput);
     });
   });
 }

@@ -3,7 +3,8 @@ const downloadDeepSpeechModel = require('./index.js');
 // TODO: try different path 
 // eg 
 // deepspeech-0.6.0-models
-const modelTarName = 'deepspeechmodels.tar.gz';
+// const modelTarName = 'deepspeechmodels.tar.gz';
+const modelTarName = 'deepspeechmodels';
 const outputPath = path.join('/Users/passarellip/Desktop', modelTarName)
 
 
