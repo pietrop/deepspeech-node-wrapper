@@ -1,6 +1,6 @@
 {
   "name": "deepspeech-node-wrapper",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -15,7 +15,6 @@
     "argparse": "^1.0.10",
     "deepspeech": "^0.6.0",
     "node-wav": "0.0.2",
-    "path-complete-extname": "^1.0.0",
     "sox-bin": "^1.0.2",
     "sox-stream": "^2.0.3",
     "tar": "^5.0.5",
