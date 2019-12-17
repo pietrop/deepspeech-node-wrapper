@@ -20,6 +20,34 @@ requrie from npm
 ```
 npm install deepspeech-node-wrapper
 ```
+### Downloading speech models
+You'd need to download the [Deepspeech model separately, (1.8Gb)](https://github.com/mozilla/DeepSpeech/releases/tag/v0.6.0). Optionally, this module provides a `downloadDeepSpeechModel` helper function, to download the model, unzip it, delete the tar file, and return the path tot he model to be used with the `deepSpeechSttWrapper` function. For ease of integration with a host application.
+
+```js
+const downloadDeepSpeechModel = require("deepspeech-node-wrapper").downloadDeepSpeechModel;
+
+const outputPath = './models.tar.gz';
+downloadDeepSpeechModel(outputPath).then((res)=>{
+    console.log('res',res)
+}).catch((error)=>{
+    console.error('error',error)
+})
+```
+
+if you don't specify a version of the model, it defaults to `0.6.0`, otherwise you can specify an optional parameter to download a different version.
+
+```js
+const downloadDeepSpeechModel = require("deepspeech-node-wrapper").downloadDeepSpeechModel;
+
+const outputPath = './models.tar.gz';
+downloadDeepSpeechModel(outputPath, '0.6.0').then((res)=>{
+    console.log('res',res)
+}).catch((error)=>{
+    console.error('error',error)
+})
+```
+
+### STT
 
 Note that the wav audio file needs to be 16khz and mono.
 

@@ -1,94 +1,64 @@
 /**
- * Helper function 
+ * Helper function
  * TODO: This Could be a separate node module (?)
  */
-const fs = require('fs');
-const wget = require('wget-improved');
-// ascii progress bar
-// const ProgressBar = require('progress');
-const tar = require('tar');
+const fs = require("fs");
+const wget = require("wget-improved");
+const tar = require("tar");
 
-// function Filedownload(src, output) {
-//   console.log(
-//     'The Demo is now downloading the pre-trained files (roughly 1.8GB), ' +
-//       'this will take a few moments...',
-//   );
-
-//   const download = wget.download(src, output);
-//   download.on('error', console.error);
-
-//   let bar = null;
-//   download.on('progress', progress => bar.tick(progress));
-//   download.on('start', () => {
-//     bar = new ProgressBar('  downloading [:bar] :percent :etas', {
-//       width: 20,
-//       total: 100000 / 2,
-//     });
-//   });
-
-//   download.on('end', async () => {
-//     bar.tick(100000 / 2);
-//     console.log('\n Extracting tar archive...');
-//     // unzip
-//     await tar.x({ file: output });
-//     console.log('Done extracting archive');
-//     // renaming files?
-//     console.log('Removinf temporary tar archive...');
-//     fs.unlinkSync(output);
-//   });
-// }
-
-
-// const modelOutput = './models.tar.gz';
-// Filedownload(modelSrc, modelOutput);
-
-
-function deepSpeechModelUrl(modelVersion){
-  return `https://github.com/mozilla/DeepSpeech/releases/download/v${modelVersion}/deepspeech-${modelVersion}-models.tar.gz`; 
+function deepSpeechModelUrl(modelVersion) {
+  // TODO: some checks it's a valid model name, eg regex for 0.6.0;
+  const deepspeechModelVersion = modelVersion ? modelVersion : "0.6.0";
+  return `https://github.com/mozilla/DeepSpeech/releases/download/v${deepspeechModelVersion}/deepspeech-${deepspeechModelVersion}-models.tar.gz`;
 }
 
-function downloadDeepSpeechModel(outputPath, modelVersion){
-    // append .tar.gz to model name for tmpTarDeepSpeechModels
-    const modelOutput = './models.tar.gz';
-    // TODO: some checks it's a valid model name
-    const deepspeechModelVersion = modelVersion ? modelVersion : '0.6.0';
-    const modelSrc = deepSpeechModelUrl(deepspeechModelVersion);
-    return new Promise(function(resolve, reject) {
+function downloadDeepSpeechModel(modelOutput, modelVersion) {
+  let modelOutputPath = modelOutput;
+  const extension = pathCompleteExtname(modelOutputPath); 
+  // if output path for model does not have right tar extension,
+  // then append this to it '.tar.gz'
+  // TODO: properly parse the path, to make sure there are no other extensions
+  if(extension !== '.tar.gz'){
+    modelOutputPath += '.tar.gz';
+  }
+  const modelSrc = deepSpeechModelUrl(modelVersion);
+  
+  return new Promise(function(resolve, reject) {
+    const download = wget.download(modelSrc, modelOutputPath);
 
-
-    const download = wget.download(modelSrc, modelOutput);
-
-    download.on('error', (error)=>{
-        reject(error);
+    download.on("error", error => {
+      reject(error);
     });
 
-    download.on('progress', (progress) => {
-        // bar.tick(progress)
-        console.log('progress:: ', progress);
+    download.on("progress", progress => {
+      // bar.tick(progress)
+      // code to show progress bar
+      console.log("progress:: ", progress);
     });
 
-    download.on('start', () => {
-        // bar = new ProgressBar('  downloading [:bar] :percent :etas', {
-        //   width: 20,
-        //   total: 100000 / 2,
-        // });
-        console.info('start')
-      });
+    download.on("start", () => {
+      // bar = new ProgressBar('  downloading [:bar] :percent :etas', {
+      //   width: 20,
+      //   total: 100000 / 2,
+      // });
+      console.info("start");
+    });
 
-      download.on('end', async () => {
-        // bar.tick(100000 / 2);
-        console.log('\n Extracting tar archive...');
-        // unzip
-        await tar.x({ file: output });
-        console.log('Done extracting archive');
-        // renaming files?
-        console.log('Removinf temporary tar archive...');
-        fs.unlinkSync(output);
-        // TODO: rename output file, 
-        console.log(output)
-        resolve(output)
-      });
-    })
+    download.on("end", async () => {
+      // bar.tick(100000 / 2);
+      console.log("\n Extracting tar archive...");
+      // unzip
+      await tar.x({ file: modelOutputPath });
+      console.log("Done extracting archive");
+      // extracted files will be in folder same name as tar archive 
+      // but without the `.tar.gz` extension
+      console.log("Removinf temporary tar archive...");
+      fs.unlinkSync(modelOutputPath);
+      // TODO: rename output file,
+      console.log(modelOutputPath);
+      resolve(modelOutputPath);
+    });
+  });
 }
 
 module.exports = downloadDeepSpeechModel;
