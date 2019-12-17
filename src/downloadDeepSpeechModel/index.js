@@ -3,6 +3,7 @@
  * TODO: This Could be a separate node module (?)
  */
 const fs = require("fs");
+const path = require('path');
 const wget = require("wget-improved");
 const tar = require("tar");
 // const pathCompleteExtname = require('path-complete-extname');
@@ -13,16 +14,17 @@ function deepSpeechModelUrl(modelVersion) {
   return `https://github.com/mozilla/DeepSpeech/releases/download/v${deepspeechModelVersion}/deepspeech-${deepspeechModelVersion}-models.tar.gz`;
 }
 
-function modelFolderOutputName(destFolder, deepspeechModelVersion) {
+function modelFolderOutputName(destFolder, modelVersion) {
   const deepspeechModelVersion = modelVersion ? modelVersion : "0.6.0";
   const modelFolderName = `deepspeech-${deepspeechModelVersion}-models`;
   return path.join(destFolder, modelFolderName);
 }
 
 function downloadDeepSpeechModel(destFolder, modelVersion) {
+  const deepspeechModelVersion = modelVersion ? modelVersion : "0.6.0";
   const modelOutputPath = path.join(
     destFolder,
-    "deepspeech-0.6.0-models.tar.gz"
+    `deepspeech-${deepspeechModelVersion}-models.tar.gz`
   );
   // const extension = pathCompleteExtname(modelOutputPath);
   // if output path for model does not have right tar extension,
