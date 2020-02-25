@@ -128,3 +128,14 @@ deepspeech-0.6.0-models
 deepspeech-0.6.0-models/
 deepspeechmodels.tar.gz
 deepspeechmodels
+
+model_tensorflow_it.tar.xz
+model_tflite_it.tar.xz
+
+model_tensorflow_it
+model_tflite_it
+
+src/model_tensorflow_it
+src/model_tflite_it
+
+trailer.wav
