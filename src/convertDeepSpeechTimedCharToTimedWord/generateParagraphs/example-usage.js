@@ -6,4 +6,4 @@ const createParagraphsFromWords = require('./index.js');
 const result = createParagraphsFromWords(exampleDeepSpeechWords)
 
 
-fs.writeFileSync('./convertDeepSpeechTimedCharToTimedWord/generateParagraphs/dpe-paragraphs.json', JSON.stringify(result, null,2))
+fs.writeFileSync('./src/convertDeepSpeechTimedCharToTimedWord/generateParagraphs/dpe-paragraphs.json', JSON.stringify(result, null,2))

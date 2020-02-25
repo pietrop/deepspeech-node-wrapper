@@ -8,8 +8,9 @@ function createParagraphsFromWords(wordsList) {
   const SPEAKER_LABEL = "U_UKN";
   let speakerItem = { speaker: `${SPEAKER_LABEL}`, start: 0, end: 0 };
   let isNewSpeaker = true;
-  wordsList.forEach(word => {
-    if (word.text.includes(".")) {
+  wordsList.forEach((word, index) => {
+    // handling edge case where the last word might not have a full stop
+    if (word.text.includes(".")|| (index === (wordsList.length-1) )) {
       speakerItem.end = word.end;
       speakerItem.speaker = `${SPEAKER_LABEL}`;
       result.push(speakerItem);
