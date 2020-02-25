@@ -5,15 +5,13 @@
 
 function createParagraphsFromWords(wordsList) {
   const result = [];
-  const SPEAKER_LABEL = "TBC";
-  let speakerItem = { speaker: `${SPEAKER_LABEL} 0`, start: 0, end: 0 };
-  let speakerCounter = 0;
+  const SPEAKER_LABEL = "U_UKN";
+  let speakerItem = { speaker: `${SPEAKER_LABEL}`, start: 0, end: 0 };
   let isNewSpeaker = true;
   wordsList.forEach(word => {
     if (word.text.includes(".")) {
       speakerItem.end = word.end;
-      speakerCounter += 1;
-      speakerItem.speaker = `${SPEAKER_LABEL} ${speakerCounter}`;
+      speakerItem.speaker = `${SPEAKER_LABEL}`;
       result.push(speakerItem);
       speakerItem = {};
       isNewSpeaker = true;
@@ -36,7 +34,7 @@ function createParagraphsFromWords(wordsList) {
     const lastWord = wordsList[numberOfWords];
     const lastWordEndTime = lastWord.end;
     const speakerItem = {
-      speaker: `${SPEAKER_LABEL} 0`,
+      speaker: `${SPEAKER_LABEL}`,
       start: firstwordStartTime,
       end: lastWordEndTime
     };
