@@ -14,7 +14,7 @@ async function main() {
     // const modelPath = path.join(__dirname,'./model_tensorflow_it');
     const res = await deepSpeechSttWrapper(audioFile, modelPath);
     const { dpeResult, result, audioLength } = await res;
-    console.log(dpeResult);
+    console.log('dpeResult', dpeResult);
     fs.writeFileSync(
       './example-output/example-output-dpe.json',
       JSON.stringify({ ...dpeResult, audioLength }, null, 2)

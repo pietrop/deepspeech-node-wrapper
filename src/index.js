@@ -86,15 +86,18 @@ function deepSpeechSttWrapper(audioFile, modelPath) {
 
       const audioLength = (audioBuffer.length / 2) * (1 / desiredSampleRate);
 
-      let result = model.sttWithMetadata(audioBuffer.slice(0, audioBuffer.length / 2));
+      // let result = model.sttWithMetadata(audioBuffer.slice(0, audioBuffer.length / 2));
+      let result = model.sttWithMetadata(audioBuffer, 1);
+
+      // TODO: need to run freeMetadata() but not sure how
+      // https://deepspeech.readthedocs.io/en/v0.6.0/NodeJS-API.html#FreeMetadata
+      // console.log('result.transcripts[0]', result.transcripts[0]);
+      // console.log('model.stt(audioBuffer)', model.stt(audioBuffer));
+      const dpeResult = convertDeepSpeechTimedCharToTimedWord(result);
+      const resulData = { dpeResult, result, audioLength };
       // Freeing up memory
       DeepSpeech.FreeMetadata(result);
       DeepSpeech.FreeModel(model);
-      // TODO: need to run freeMetadata() but not sure how
-      // https://deepspeech.readthedocs.io/en/v0.6.0/NodeJS-API.html#FreeMetadata
-      console.log('result', result);
-      const dpeResult = convertDeepSpeechTimedCharToTimedWord(result);
-      const resulData = { dpeResult, result, audioLength };
       resolve(resulData);
     });
   });
