@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "argparse": "^1.0.10",
-    "deepspeech": "^0.6.0",
+    "deepspeech": "^0.9.3",
     "node-wav": "0.0.2",
     "sox-bin": "^1.0.2",
     "sox-stream": "^2.0.3",
