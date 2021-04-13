@@ -51,7 +51,8 @@ function downloadDeepSpeechModel(destFolder, modelVersion, progressCallback) {
       // code to show progress bar
       console.log('progress:: ', progress);
       if (progressCallback) {
-        progressCallback(progress);
+        // Convert progress callback eg 0.9999937336371199 to 100%
+        progressCallback(parseInt(parseFloat(progress) * 100));
       }
     });
 
