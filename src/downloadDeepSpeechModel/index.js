@@ -24,7 +24,7 @@ function modelFolderOutputName(destFolder, modelVersion) {
   return path.join(destFolder, modelFolderName);
 }
 
-function downloadDeepSpeechModel(destFolder, modelVersion) {
+function downloadDeepSpeechModel(destFolder, modelVersion, progressCallback) {
   const deepspeechModelVersion = modelVersion ? modelVersion : DEFAULT_MODEL_V;
   const modelOutputPath = path.join(
     destFolder,
@@ -50,6 +50,9 @@ function downloadDeepSpeechModel(destFolder, modelVersion) {
       // bar.tick(progress)
       // code to show progress bar
       console.log('progress:: ', progress);
+      if (progressCallback) {
+        progressCallback(progress);
+      }
     });
 
     download.on('start', () => {

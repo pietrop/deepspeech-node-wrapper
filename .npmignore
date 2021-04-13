@@ -14,3 +14,5 @@ src/model_tensorflow_it
 src/models_0.9.3
 model_tensorflow_it.tar.xz
 model_tflite_it.tar.xz  
+
+# TODO: should ignore .json example and example-usage.js files

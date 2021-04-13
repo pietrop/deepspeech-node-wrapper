@@ -7,7 +7,11 @@ const downloadDeepSpeechModel = require('./index.js');
 const outputPathDestination = path.join('/Users/passarellip/Desktop');
 const MODEL_V = '0.9.3';
 
-downloadDeepSpeechModel(outputPathDestination, MODEL_V)
+const exampleProgressCallback = (progressData) => {
+  console.log('progressData', progressData);
+};
+
+downloadDeepSpeechModel(outputPathDestination, MODEL_V, exampleProgressCallback)
   .then((res) => {
     console.log('res', res);
   })
