@@ -52,7 +52,7 @@ function downloadDeepSpeechModel(destFolder, modelVersion, progressCallback) {
       console.log('progress:: ', progress);
       if (progressCallback) {
         // Convert progress callback eg 0.9999937336371199 to 100%
-        progressCallback(parseInt(parseFloat(progress) * 100));
+        progressCallback(parseFloat(progress) * 100);
       }
     });
 
