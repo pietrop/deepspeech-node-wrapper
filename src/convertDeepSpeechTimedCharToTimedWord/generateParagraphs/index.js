@@ -5,17 +5,26 @@
 
 function createParagraphsFromWords(wordsList) {
   const result = [];
-  const SPEAKER_LABEL = "U_UKN";
+  const SPEAKER_LABEL = 'U_UKN';
   let speakerItem = { speaker: `${SPEAKER_LABEL}`, start: 0, end: 0 };
   let isNewSpeaker = true;
   wordsList.forEach((word, index) => {
-    // handling edge case where the last word might not have a full stop
-    if (word.text.includes(".")|| (index === (wordsList.length-1) )) {
+    // handling edge case where there is just one word
+    // if (word.text.includes('.') &&&& index !== wordsList.length - 1) {
+    //   speakerItem.end = word.end;
+    //   speakerItem.speaker = `${SPEAKER_LABEL}`;
+    //   speakerItem.start = word.start;
+    //   isNewSpeaker = true;
+    //   // handling edge case where the last word might not have a full stop
+    // } else
+    if (word.text.includes('.') || index === wordsList.length - 1) {
       speakerItem.end = word.end;
       speakerItem.speaker = `${SPEAKER_LABEL}`;
       result.push(speakerItem);
       speakerItem = {};
       isNewSpeaker = true;
+      // To handle edge case of single word, then this gets overritten if it spans multiple words
+      speakerItem.start = word.start;
     } else {
       if (isNewSpeaker) {
         speakerItem.start = word.start;
@@ -26,7 +35,7 @@ function createParagraphsFromWords(wordsList) {
     }
   });
 
-  // handle instance where there is no punctuation, and therefore no paragraphs 
+  // handle instance where there is no punctuation, and therefore no paragraphs
   // to make one overarching paragraph for all the words
   if (result.length === 0) {
     const firstword = wordsList[0];
@@ -37,7 +46,7 @@ function createParagraphsFromWords(wordsList) {
     const speakerItem = {
       speaker: `${SPEAKER_LABEL}`,
       start: firstwordStartTime,
-      end: lastWordEndTime
+      end: lastWordEndTime,
     };
     result.push(speakerItem);
   }

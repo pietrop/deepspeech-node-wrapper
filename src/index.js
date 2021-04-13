@@ -93,8 +93,11 @@ function deepSpeechSttWrapper(audioFile, modelPath) {
       // https://deepspeech.readthedocs.io/en/v0.6.0/NodeJS-API.html#FreeMetadata
       // console.log('result.transcripts[0]', result.transcripts[0]);
       // console.log('model.stt(audioBuffer)', model.stt(audioBuffer));
+      // TODO: remove this fs, is just for troubleshooting
+      // fs.writeFileSync('./example-output/deepspeech-output.json', JSON.stringify(result, null, 2));
       const dpeResult = convertDeepSpeechTimedCharToTimedWord(result);
-      const resulData = { dpeResult, result, audioLength };
+      const resulData = { dpeResult, audioLength };
+      // const resulData = { dpeResult, result, audioLength };
       // Freeing up memory
       DeepSpeech.FreeMetadata(result);
       DeepSpeech.FreeModel(model);
