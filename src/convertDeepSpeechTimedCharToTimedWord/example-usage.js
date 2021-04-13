@@ -1,6 +1,6 @@
 const deepSpeechData = require('./deepspeech-data.json');
 const convertDeepSpeechToDPE = require('./index.js');
 
-const result = convertDeepSpeechToDPE(deepSpeechData)
+const result = convertDeepSpeechToDPE(deepSpeechData);
 
-console.log(result)
+console.log(result);
