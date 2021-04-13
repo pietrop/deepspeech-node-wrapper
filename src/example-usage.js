@@ -5,9 +5,11 @@ const deepSpeechSttWrapper = require('./index.js');
 // absolute path of file
 const audioFile = './audio/2830-3980-0043.wav';
 // const audioFile =
-//   '/Users/passarellip/CODE/BITBUCKET/callhandler/node_modules/officegen/examples/sounds_for_examples/001.wav';
+// '/Users/passarellip/CODE/BITBUCKET/callhandler/node_modules/officegen/examples/sounds_for_examples/001.wav';
 // const audioFile = './trailer.wav';
 // const audioFile = "/Users/passarellip/Downloads/mulvaney.wav";
+// const audioFile =
+// '/Users/passarellip/CODE/WORK/Democratic Presidential Debate STT Analyses/debates/Democratic Presidential Debate - June 27 (Full) | NBC News/_-cX7hni-zGD8-trimmed.wav';
 async function main() {
   try {
     const modelPath = path.join(__dirname, './models_0.9.3');
