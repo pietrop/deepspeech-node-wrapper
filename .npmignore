@@ -9,3 +9,8 @@ models.tar.gz
 
 deepspeech-0.6.0-models/
 deepspeech-0.6.1-models/
+
+src/model_tensorflow_it
+src/models_0.9.3
+model_tensorflow_it.tar.xz
+model_tflite_it.tar.xz  
